@@ -1,0 +1,11 @@
+﻿
+@model IEnumerable<string>
+
+    @{
+        Catalog catalog = new Catalog();
+    }
+    @Html.DropDownListFor(catalog => catalog , Model as SelectList );
+
+  
+
+

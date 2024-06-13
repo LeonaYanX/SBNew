@@ -1,0 +1,35 @@
+﻿@using SB.ViewModels
+
+@model IEnumerable<BookVM>  
+
+@if (Model.Count()== 0)
+{
+    <h3>Nothing found</h3>
+}
+
+@foreach (var b in Model)
+{
+    <tr>
+
+        @foreach (var i in b.Src)
+        {
+            <img src="@i" alt="Photo" width="70" height="100" />            
+        }
+
+        @Html.Display("Title")
+       
+        @Html.Display("Author")
+        <br />
+         <td>@b.Swap</td>
+        
+         <b>Price: </b>
+        <td>@b.Price</td> 
+        @Html.Display("Info")
+     
+    </tr>
+   
+    @Html.ActionLink("more", "Details", "Books", new { idBook = b.Id })
+    @Html.ActionLink("change", "Edit", "Books", new { idBook = b.Id })     
+    <br />
+}
+

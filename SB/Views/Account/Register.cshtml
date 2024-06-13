@@ -1,0 +1,8 @@
+﻿@model SB.Models.Register
+
+@using (@Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+ @Html.EditorForModel() <br />
+
+ <input type="submit" value="Submit" />
+}
