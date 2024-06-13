@@ -1,14 +1,8 @@
 ﻿@model SB.ViewModels.BookVM
 @{
-    SwapBookDbContext swapBookDbContext = new SwapBookDbContext();
-    List<string> categories = new List<string>();
-    foreach (var cat in swapBookDbContext.Catalogs)
-    {
-        categories.Add(cat.Value.ToString());
-    }
-    
 }
-@using (@Html.BeginForm("Index", "NewBook", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+@using (@Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
   
     <p>
@@ -35,10 +29,11 @@
         @Html.TextAreaFor(mbox=>mbox.Info)
     </p>
 
-   <p>
-        @Html.DropDownList("idCatalog", new SelectList(categories), "Choose the category")
-   </p> 
-   <p>
+    <p>
+        @Html.DropDownListFor(m => m.Category, @ViewBag.Categories as List<SelectListItem>, "Choose the category")
+    </p>
+
+    <p>
         <input type="submit" value="Send" />
    </p>
     
