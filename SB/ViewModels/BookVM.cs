@@ -9,7 +9,7 @@
 
         public int? Price { get; set; }
 
-        public bool Swap { get; set; }
+        public bool? Swap { get; set; }
       
         public string[] Src { get; set; }
         public string Category { get; set; }

@@ -2,6 +2,9 @@
 
 @model IEnumerable<BookVM>  
 
+<h4>BOOKS LIST</h4>
+<br />
+
 @if (Model.Count()== 0)
 {
     <h3>Nothing found</h3>
@@ -16,19 +19,26 @@
             <img src="@i" alt="Photo" width="70" height="100" />            
         }
 
-        @Html.Display("Title")
+        <b>@Html.LabelFor(x => b.Title)</b>
+        @Html.DisplayFor(x => b.Title)
        
-        @Html.Display("Author")
         <br />
-         <td>@b.Swap</td>
+
+        <b>@Html.LabelFor(x => b.Author)</b>
+        @Html.DisplayFor(x => b.Author)
+
+        <br />
+
+        <b>Swap</b>
+        @b.Swap
         
-         <b>Price: </b>
+        <b>Price: </b>
         <td>@b.Price</td> 
         @Html.Display("Info")
      
     </tr>
-   
-    @Html.ActionLink("more", "Details", "Books", new { idBook = b.Id })
+    <br />
+    @Html.ActionLink("more", "Details", "Books", new { idBook = b.Id }) <span>&nbsp;</span>
     @Html.ActionLink("change", "Edit", "Books", new { idBook = b.Id })     
     <br />
 }

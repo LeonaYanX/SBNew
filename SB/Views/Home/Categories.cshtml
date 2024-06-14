@@ -6,12 +6,14 @@
     
 
 <div class="text-center" style="background-size">
-   <table class="table">
+   
+    <h4>BOOKS LIST</h4>
+    <br />
 
-        @foreach (var c in Model)
-        {
-            @Html.ActionLink(c.Value, "List", "Books", new { idCategory = c.Id });<br /> 
-        }
+    @foreach (var c in Model)
+    {
+        @Html.ActionLink(c.Value, "List", "Books", new { idCategory = c.Id });<br /> 
+    }
         
-   </table>
+   
 </div>

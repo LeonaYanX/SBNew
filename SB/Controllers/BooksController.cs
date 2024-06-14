@@ -11,17 +11,18 @@ namespace SB.Controllers
 		{
 			using (var db = new SwapBookDbContext())
 			{
-				var m = db.Books.Where(b => b.IdCatalog == idCategory)
-					.Include(c => c.Galaries)
+				var m = db.Books.Where(b => b.IdCatalog == idCategory).Include("IdCatalogNavigation")
+                    .Include(c => c.Galaries)
 					.Select(e => new BookVM()
 					{
 						Id = e.Id,
 						Title = e.Title,
-						Author = e.Author,
-						Info = e.Info,
+						Author = e.Author,						
 						Price = e.Price,
-						Swap = (e.Swap == 1 ? true : false),
-						Src = new string[] { GetBase64Image(e.Galaries.FirstOrDefault().Photo) }
+						Swap = e.Swap,
+                        Category = e.IdCatalogNavigation.Value,
+						Src = new string[] { GetBase64Image(e.Galaries.FirstOrDefault().Photo) },
+                        Info = e.Info
 					}).ToList();
 
 
@@ -36,11 +37,13 @@ namespace SB.Controllers
                 var e = dbContext.Books.Include(e => e.Galaries).Include("IdCatalogNavigation").FirstOrDefault(b => b.Id == idBook);
                 var book = new BookVM()
                 {
+                    Id = e.Id,
+                    Title = e.Title,
                     Author = e.Author,
                     Price = e.Price,
+                    Swap = e.Swap,
+                    Src = GetBase64Images(e.Galaries),
                     Info = e.Info,
-                    Swap = (e.Swap == 1 ? true : false),
-                    Title = e.Title,
                     Category = (e.IdCatalogNavigation?.Value) ?? "Not Specified"
                 };
 
@@ -90,7 +93,7 @@ namespace SB.Controllers
                     IdCatalog = Convert.ToInt32(newBook.Category)
                 };
 
-                book.Swap = newBook.Swap == true ? 1 : 0;
+                book.Swap = newBook.Swap;
 
 
                 foreach (var f in files)
@@ -121,5 +124,25 @@ namespace SB.Controllers
 
 			return "data:image/png;base64, " + Convert.ToBase64String(bytes);
 		}
-	}
+
+        private static string[] GetBase64Images(ICollection<Galary> galaries)
+        {
+            List<string> images = new List<string>();
+
+            foreach (Galary g in galaries)
+            {
+                if (g.Photo != null)
+                {
+                    images.Add("data:image/png;base64, " + Convert.ToBase64String(g.Photo));
+                }
+            }
+
+            return images.ToArray();
+
+            //if (bytes == null)
+            //    return String.Empty;
+
+            //return "data:image/png;base64, " + Convert.ToBase64String(bytes);
+        }
+    }
 }

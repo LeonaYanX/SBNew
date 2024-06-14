@@ -13,7 +13,7 @@ public partial class Book
 
     public int? Price { get; set; }
 
-    public int? Swap { get; set; }
+    public bool? Swap { get; set; }
 
     public int? IdCatalog { get; set; }
 

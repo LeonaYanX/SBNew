@@ -4,7 +4,20 @@
 
 <h4>BOOK DETAILS</h4>
 <br />
-@* images *@
+
+@if (Model.Src != null)
+{
+    @foreach (var i in Model.Src)
+    {
+        <img src="@i" alt="Photo" width="100" height="150" />
+    }
+    <br />
+}
+else
+{
+    <b>No images</b>
+    <br />
+}
 
 @Html.LabelFor(x => x.Author) <span>&nbsp;</span>
 @Html.DisplayFor(x => x.Author)
