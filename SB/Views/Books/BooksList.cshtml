@@ -30,7 +30,8 @@
         <br />
 
         <b>Swap</b>
-        @b.Swap
+        @if (b.Swap.HasValue)
+            @Html.DisplayFor(x => b.Swap.Value)
         
         <b>Price: </b>
         <td>@b.Price</td> 
