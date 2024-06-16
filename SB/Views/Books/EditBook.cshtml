@@ -30,8 +30,30 @@
         <input type="text" asp-for="Info"></input>
     </p>
     <p>
-        <label asp-for="EditPhoto">Photo</label><br /> 
-        <input type="image" asp-for="EditPhoto" alt="Photoes"/>
+        
+        <label asp-for="EditPhoto">Photo</label><br />
+
+
+        @if (Model.Src != null)
+        {
+            @foreach (var i in Model.Src)
+            {
+                <img src="@i" alt="Photo" class="responsive-image"  />
+                <style>
+                    .responsive-image
+                    {
+                    width:100%;
+                    height:auto;
+                    max-width: 600px;
+                    display:block;
+                    margin:0 auto;
+                    }
+                </style>
+            }
+            <br />
+        }
+        
+        
     </p>
     <p>
         
