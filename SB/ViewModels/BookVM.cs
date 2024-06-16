@@ -9,9 +9,10 @@
 
         public int? Price { get; set; }
 
-        public bool? Swap { get; set; }
+        public bool Swap { get; set; } = false;
       
-        public string[] Src { get; set; }
+        public byte[] ? EditPhoto { get; set; }
+        public string[] ?Src { get; set; }
         public string Category { get; set; }
 
         public string? Info { get; set; }

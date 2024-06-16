@@ -1,12 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-
+using Microsoft.EntityFrameworkCore;
 using SB.Models;
+using SB.ViewModels;
+
 
 namespace SB.Controllers
 {
+
     public class AccountController : BaseController
-    {       
+    {
+        private static string GetBase64Image(byte[] bytes)
+        {
+            if (bytes == null)
+                return String.Empty;
+
+            return "data:image/png;base64, " + Convert.ToBase64String(bytes);
+        }
         public IActionResult Register()
         {
             return View();
@@ -68,8 +77,24 @@ namespace SB.Controllers
 
         public IActionResult Info()
         {
+            // Возвращение  списка книг- обьявлений юзера
+
+            SwapBookDbContext swapBookDbContext= new SwapBookDbContext();
+            
+            List<BookVM> bookVMs = new List<BookVM>();
+            
             if (IsUserLogged())
-                return View();
+            {
+                var books = swapBookDbContext.Books.Where(i => i.IdUser == GetUserId()).Include("IdCatalogNavigation")
+                       .Include(c => c.Galaries).ToList();
+                for (int i = 0; i < books.Count(); i++)
+                {
+                    bookVMs.Add(new GetBookModel().GetBookVM(books[i]));
+                }
+
+                return View(bookVMs);
+            }
+
             else
                 return RedirectToAction("Login");
         }

@@ -13,7 +13,11 @@ namespace SB.Controllers
 
         protected int GetUserId()
         {
-            return HttpContext.Session.GetInt32("user").Value;
+            
+                return HttpContext.Session.GetInt32("user").Value;
+            
         }
+
+       
     }
 }

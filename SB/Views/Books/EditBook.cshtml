@@ -2,11 +2,46 @@
 
 @model BookVM
 
-EDIT BOOK
+<h2>Edit Book</h2>
 
-@using (Html.BeginForm("Index", "BookCategoryMore"))
-{
-    @Html.EditorForModel()
-}
+<form asp-action="edit" asp-controller="Books" asp-route-id="@Model.Id">
+    <p>
+        <label asp-for="Title">Title</label><br/>
+        <input type="text" asp-for="Title"></input>
+    </p>
+    <p>
+        <label asp-for="Author">Author</label><br />
+        <input type="text" asp-for="Author"></input>
+    </p>
+    <p>
+        <label asp-for="Price">Price</label><br />
+        <input type="number" asp-for="Price"></input>
+    </p>
+    <p>
+        <label asp-for="Swap">Swap</label><br />
+        <input type="checkbox" asp-for="Swap"></input>
+    </p>
+    <p>
+        <label asp-for="Category">Category</label><br />
+        <input type="text" asp-for="Category" />
+    </p>
+    <p>
+        <label asp-for="Info">Info</label><br />
+        <input type="text" asp-for="Info"></input>
+    </p>
+    <p>
+        <label asp-for="EditPhoto">Photo</label><br /> 
+        <input type="image" asp-for="EditPhoto" alt="Photoes"/>
+    </p>
+    <p>
+        
+        <input type="submit" value="Save" formmethod="post"></input>
+    </p>
+
+    </form>
+
+<br />
+
+
 
 
