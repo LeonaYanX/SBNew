@@ -1,4 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Hosting;//
+using Microsoft.AspNetCore.Builder;//
+using Microsoft.Extensions.DependencyInjection;//
+using Microsoft.Extensions.Hosting;//
 using System;
 
 namespace SB
@@ -7,13 +11,15 @@ namespace SB
     {
         public static void Main(string[] args)
         {
+           
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDistributedMemoryCache();
 
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(900);
+                options.IdleTimeout = TimeSpan.FromSeconds(1800);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -46,7 +52,7 @@ namespace SB
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+           // app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",

@@ -2,9 +2,25 @@
 
 @model BookVM
 
+<style>
+    .new-section {
+        border-radius: 25px;
+        height: 100%;
+        width: 300px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        padding: 20px;
+        text-align: left;
+        background: #FFF4A3;
+    }
+</style>
+
 <h2>Edit Book</h2>
 
+
+
 <form asp-action="edit" asp-controller="Books" asp-route-id="@Model.Id">
+   
     <p>
         <label asp-for="Title">Title</label><br/>
         <input type="text" asp-for="Title"></input>
@@ -22,8 +38,9 @@
         <input type="checkbox" asp-for="Swap"></input>
     </p>
     <p>
-        <label asp-for="Category">Category</label><br />
-        <input type="text" asp-for="Category" />
+        @Html.DropDownListFor(m => m.Category, @ViewBag.Categories as List<SelectListItem>)
+        <br /> 
+        
     </p>
     <p>
         <label asp-for="Info">Info</label><br />
@@ -42,7 +59,7 @@
                 <style>
                     .responsive-image
                     {
-                    width:100%;
+                    width:22%;
                     height:auto;
                     max-width: 600px;
                     display:block;

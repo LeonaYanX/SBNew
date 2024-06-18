@@ -40,7 +40,8 @@
     </tr>
     <br />
     @Html.ActionLink("more", "Details", "Books", new { idBook = b.Id }) <span>&nbsp;</span>
-    @Html.ActionLink("change", "Edit", "Books", new { idBook = b.Id } ,FormMethod.Get)     
+    @Html.ActionLink("change", "Edit", "Books", new { idBook = b.Id } ,FormMethod.Get)    
+    @Html.ActionLink("Delete" , "Delete" , "Books" , new {idBook = b.Id})
     <br />
 }
 

@@ -9,7 +9,7 @@ namespace SB.Controllers
 
     public class AccountController : BaseController
     {
-        private static string GetBase64Image(byte[] bytes)
+        public static string GetBase64Image(byte[] bytes)
         {
             if (bytes == null)
                 return String.Empty;

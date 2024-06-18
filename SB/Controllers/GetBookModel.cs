@@ -40,7 +40,7 @@ namespace SB.Controllers
                 Id = book.Id,
                 Author = book?.Author,
                 Category = book?.IdCatalogNavigation?.Value.ToString()
-                    ,
+                ,
                 Info = book?.Info,
                 Price = book?.Price,
                 Swap = book.Swap,

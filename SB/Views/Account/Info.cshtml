@@ -1,13 +1,49 @@
 ﻿@using SB.ViewModels
+@using SB.Controllers
 
 @model IEnumerable<BookVM>
 
 @{
     ViewData["Title"] = "My Account";
 }
+<style>
+    .responsive-image {
+        width: 33%;
+        min-height:80px;
+        height: auto;
+        max-width: 600px;
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+<style>
+    .new-section {
+        border-radius: 30px;
+        height: 30%;
+        width: 200px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        padding: 20px;
+        text-align: left;
+        background-color:darksalmon;
+        opacity: 90%;
+        background-blend-mode:soft-light;
+        display:inline-grid;
+        box-shadow: 3px 2px 2px gray;
+    }
+</style>
+<style>
+    .inline-links{
+    display: flex;
+    gap: 10mpx;
+    }
+</style>
+
 <h1>@ViewData["Title"]</h1>
+<br />
 
 @Html.ActionLink("Add new book", "Create", "Books")
+
 
 
 <br />
@@ -15,7 +51,7 @@ MY BOOKS LIST
 <br />
 
 
-@Model.GetEnumerator()
+
 
 @if (Model.Count() == 0)
 {
@@ -24,12 +60,21 @@ MY BOOKS LIST
 
 @foreach (var b in Model)
 {
-    <tr>
+   
 
-        @foreach (var i in b.Src)
+    <div class="new-section">
+
+        @if (b.Src.Length!=0)
         {
-            <img src="@i" alt="Photo" width="70" height="100" />
+            <img src="@b.Src.First()" alt="Photo" width="70" height="100" class="responsive-image" />
         }
+        else
+        {
+            
+        <img src="~/images/emptyList.jpg" alt="Photo" width="70" height="100" class="responsive-image" />
+        }
+        
+      
 
         <b>@Html.LabelFor(x => b.Title)</b>
         @Html.DisplayFor(x => b.Title)
@@ -40,21 +85,24 @@ MY BOOKS LIST
         @Html.DisplayFor(x => b.Author)
 
         <br />
-
-        <b>Swap</b>
-       @Html.DisplayFor(x => b.Swap)
+        <div class="inline-links">
+            <b>Swap</b> <span>&nbsp;</span>
+            @Html.DisplayFor(x => b.Swap)
+        </div>
+      
 
 
         <b>Price: </b>
         <td>@b.Price</td>
         @Html.Display("Info")
 
-    </tr>
-    <br />
-    @Html.ActionLink("more", "Details", "Books", new { idBook = b.Id }) <span>&nbsp;</span>
-    @Html.ActionLink("change", "Edit", "Books", new { idBook = b.Id }) <span>&nbsp;</span>
-
-    @Html.ActionLink("delete", "Delete", "Books", new { idBook = b.Id } , FormMethod.Post)
     
-    <br />
+        <div class="inline-links">
+            @Html.ActionLink("more", "Details", "Books", new { idBook = b.Id }) <span>&nbsp;</span>
+            @Html.ActionLink("change", "Edit", "Books", new { idBook = b.Id })<span>&nbsp;</span>
+            @Html.ActionLink("delete", "Delete", "Books", new { idBook = b.Id }, FormMethod.Post)
+        </div>
+
+    </div>
+    
 }

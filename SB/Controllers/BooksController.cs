@@ -48,12 +48,19 @@ namespace SB.Controllers
         public IActionResult Edit(int idBook )
         {
             
-            
                 using (SwapBookDbContext dbContext = new SwapBookDbContext())
                 {
-                    var e = dbContext.Books.Include(e => e.Galaries).Include("IdCatalogNavigation")
+               
+
+                var e = dbContext.Books.Include(e => e.Galaries).Include("IdCatalogNavigation")
                         .FirstOrDefault(b => b.Id == idBook);
-                    var eVM = new GetBookModel().GetBookVM(e);
+
+                var categories = dbContext.Catalogs.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Value
+                    , Selected= e.IdCatalog==c.Id }).ToList();
+
+                  ViewBag.Categories = categories;  
+
+                var eVM = new GetBookModel().GetBookVM(e);
                      return View("EditBook" , eVM); 
                 }
            
@@ -66,13 +73,13 @@ namespace SB.Controllers
         public IActionResult Edit(BookVM eVM)
         {
             SwapBookDbContext db = new SwapBookDbContext();
-            Book book = new Book() {Author= eVM.Author , Id =eVM.Id,Title=eVM.Title, Info=eVM.Info , Price = eVM.Price , Swap=eVM.Swap ,IdUser =GetUserId()};
-           
+
+
+            Book book = new Book() {Author= eVM.Author , Id =eVM.Id,Title=eVM.Title, Info=eVM.Info 
+                , Price = eVM.Price , Swap=eVM.Swap ,IdUser =GetUserId()};
            
 
-            Catalog catalog = new Catalog();
-            catalog.Value = eVM.Category.ToString();
-            book.IdCatalog = catalog.Id;
+            book.IdCatalog = Convert.ToInt32(eVM.Category);
             
 
             Galary galary = new Galary();
@@ -95,25 +102,29 @@ namespace SB.Controllers
                 
             }
                 db.Books.Update(book);
-            db.SaveChanges();
-            return RedirectToAction("BookList");
+            db.SaveChanges();  // 
+            return RedirectToAction("Info" , "Account");
         }
 
-        // Delete
-        /* [HttpPost]
+       /* public IActionResult Delete(int idBook) 
+        {
+         SwapBookDbContext db = new SwapBookDbContext();
+            db.Books.Where(i=>i.Id==idBook).
+        }*/
+      
 
-         public IActionResult Create()
-         {
-             using (var dbContext = new SwapBookDbContext())
-             {
-                 var categories = dbContext.Catalogs.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.Value }).ToList();
-                 categories.First().Selected = true;
+        public IActionResult Create()
+        {
+            using (var dbContext = new SwapBookDbContext())
+            {
+                var categories = dbContext.Catalogs.Select(e => new SelectListItem { Value = e.Id.ToString(), Text = e.Value }).ToList();
+                categories.First().Selected = true;
 
-                 ViewBag.Categories = categories;
-             }                
+                ViewBag.Categories = categories;
+            }
 
-             return View("CreateBook");
-         }*/
+            return View("CreateBook");
+        }
 
         public IActionResult MyBooks()
         {
