@@ -15,26 +15,26 @@
     }
 </style>
 
-<h2>Edit Book</h2>
+<h2>Редактировать</h2>
 
 
 
 <form asp-action="edit" asp-controller="Books" asp-route-id="@Model.Id">
    
     <p>
-        <label asp-for="Title">Title</label><br/>
-        <input type="text" asp-for="Title"></input>
+        <label asp-for="Title">Название</label><br/>
+        <input type="text" asp-for="Title" />
     </p>
     <p>
-        <label asp-for="Author">Author</label><br />
+        <label asp-for="Author">Автор</label><br />
         <input type="text" asp-for="Author"></input>
     </p>
     <p>
-        <label asp-for="Price">Price</label><br />
+        <label asp-for="Price">Цена</label><br />
         <input type="number" asp-for="Price"></input>
     </p>
     <p>
-        <label asp-for="Swap">Swap</label><br />
+        <label asp-for="Swap">Обмен</label><br />
         <input type="checkbox" asp-for="Swap"></input>
     </p>
     <p>
@@ -43,12 +43,12 @@
         
     </p>
     <p>
-        <label asp-for="Info">Info</label><br />
-        <input type="text" asp-for="Info"></input>
+        <label asp-for="Info">Информация</label><br />
+        <input type="text" asp-for="Info" />
     </p>
     <p>
         
-        <label asp-for="EditPhoto">Photo</label><br />
+        <label asp-for="EditPhoto">Фотографии</label><br />
 
 
         @if (Model.Src != null)
@@ -74,7 +74,7 @@
     </p>
     <p>
         
-        <input type="submit" value="Save" formmethod="post"></input>
+        <input type="submit" value="Сохранить" formmethod="post"></input>
     </p>
 
     </form>

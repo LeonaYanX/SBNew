@@ -4,7 +4,7 @@
 @model IEnumerable<BookVM>
 
 @{
-    ViewData["Title"] = "My Account";
+    ViewData["Title"] = "Личный кабинет";
 }
 <style>
     .responsive-image {
@@ -19,35 +19,36 @@
 <style>
     .new-section {
         border-radius: 30px;
-        height: 30%;
+        height: 100%;
         width: 200px;
         margin-bottom: 10px;
         margin-top: 10px;
         padding: 20px;
-        text-align: left;
-        background-color:darksalmon;
+        text-align: center;
+        background-color:whitesmoke;
         opacity: 90%;
         background-blend-mode:soft-light;
         display:inline-grid;
-        box-shadow: 3px 2px 2px gray;
+        box-shadow: 2px 1px 1px gray;
     }
 </style>
 <style>
     .inline-links{
     display: flex;
     gap: 10mpx;
+    text-align:center;
     }
 </style>
 
 <h1>@ViewData["Title"]</h1>
 <br />
 
-@Html.ActionLink("Add new book", "Create", "Books")
+@Html.ActionLink("Добавить книгу", "Create", "Books", new { @class = "text-dark" })
 
 
 
 <br />
-MY BOOKS LIST
+Мои обьявления:
 <br />
 
 
@@ -55,7 +56,7 @@ MY BOOKS LIST
 
 @if (Model.Count() == 0)
 {
-    <h3>Nothing found</h3>
+    <h3>Ничего не найденно</h3>
 }
 
 @foreach (var b in Model)
@@ -76,33 +77,40 @@ MY BOOKS LIST
         
       
 
-        <b>@Html.LabelFor(x => b.Title)</b>
+        <b>@Html.LabelFor(x => b.Title,"Название:")</b>
         @Html.DisplayFor(x => b.Title)
 
         <br />
 
-        <b>@Html.LabelFor(x => b.Author)</b>
+        <b>@Html.LabelFor(x => b.Author ,"Автор:")</b>
         @Html.DisplayFor(x => b.Author)
 
         <br />
         <div class="inline-links">
-            <b>Swap</b> <span>&nbsp;</span>
+            <b>Обмен:</b> <span>&nbsp;</span>
             @Html.DisplayFor(x => b.Swap)
         </div>
       
 
-
-        <b>Price: </b>
+        
+        <b>Цена:</b>
         <td>@b.Price</td>
+        @Html.LabelFor(x=>b.Info,"Информация:")
         @Html.Display("Info")
 
     
         <div class="inline-links">
-            @Html.ActionLink("more", "Details", "Books", new { idBook = b.Id }) <span>&nbsp;</span>
-            @Html.ActionLink("change", "Edit", "Books", new { idBook = b.Id })<span>&nbsp;</span>
-            @Html.ActionLink("delete", "Delete", "Books", new { idBook = b.Id }, FormMethod.Post)
+            @Html.ActionLink("подробнее", "Details", "Books", new { idBook = b.Id }) <span>&nbsp;</span>
+            @Html.ActionLink("изменить", "Edit", "Books", new { idBook = b.Id })
+           
         </div>
+        <div class="inline-links">
 
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            @Html.ActionLink("удалить", "Delete", "Books", new { idBook = b.Id }, FormMethod.Post)
+        </div>
+        
     </div>
     
 }

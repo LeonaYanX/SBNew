@@ -1,18 +1,66 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Главная страница";
 }
+<style>
+    .new-section {
+        border-radius:20%;
+        height: 150px;
+        width: 150px;
+        margin-bottom: 5px;
+        margin-top: 10px;
+        padding: 7px;
+        text-align: center;
+        border:groove;
+        
+       
+        
+        background-image: url("./images/categoryWB.png");
+        background-size: cover;
+        background-position: center;
+        background-color:transparent;
+        background-blend-mode:color-burn;
+        display: inline-grid;
+        box-shadow: 1px 1px 1px white;
+        
+    }
+</style>
+<style>
+    .image-wrap
+    {
+    opacity:33%;
+    }
+</style>
+<style>
+    .responsive-image {
+        width: 22%;
+        height: auto;
+        max-width: 600px;
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+
+
+
 @model IEnumerable<Catalog>
 
-    
-
-<div class="text-center" style="background-size">
    
-    <h4>BOOKS LIST</h4>
+<div class="text-center" style="background-size">
+
+
+    
     <br />
 
     @foreach (var c in Model)
     {
-        @Html.ActionLink(c.Value, "List", "Books", new { idCategory = c.Id });<br /> 
+        <div class="new-section" style="text-decoration-color:black">
+
+            <b class="text-light"> @Html.ActionLink(c.Value, "List", "Books", new { idCategory = c.Id }, new {@class="text-light"}) </b>
+           
+            
+        </div>
+        
     }
         
    

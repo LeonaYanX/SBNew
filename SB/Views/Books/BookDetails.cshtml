@@ -2,7 +2,7 @@
 
 @model BookVM
 
-<h4>BOOK DETAILS</h4>
+<h4>Подробнее</h4>
 <br />
 
 @if (Model.Src != null)
@@ -15,25 +15,33 @@
 }
 else
 {
-    <b>No images</b>
+    <b>Нет фотографии</b>
     <br />
 }
 
-@Html.LabelFor(x => x.Author) <span>&nbsp;</span>
+@Html.LabelFor(x => x.Author,"Автор:") <span>&nbsp;</span>
 @Html.DisplayFor(x => x.Author)
 <br />
-@Html.LabelFor(x => x.Title) <span>&nbsp;</span>
+@Html.LabelFor(x => x.Title , "Название:") <span>&nbsp;</span>
 @Html.DisplayFor(x => x.Title)
 <br />
-@Html.LabelFor(x => x.Info) <span>&nbsp;</span>
+@Html.LabelFor(x => x.Info,"Информация:") <span>&nbsp;</span>
 @Html.DisplayFor(x => x.Info)
 <br />
-@Html.LabelFor(x => x.Price) <span>&nbsp;</span>
+@Html.LabelFor(x => x.Price,"Цена:") <span>&nbsp;</span>
 @Html.DisplayFor(x => x.Price)
 <br />
-@Html.LabelFor(x => x.Category) <span>&nbsp;</span>
+@Html.LabelFor(x => x.Category ,"Жанр:") <span>&nbsp;</span>
 @Html.DisplayFor(x => x.Category)
 <br />
-@Html.LabelFor(x => x.Swap) <span>&nbsp;</span>
+@Html.LabelFor(x => x.Swap ,"Обмен:") <span>&nbsp;</span>
 @Html.DisplayFor(x => x.Swap)
+
+<br />
+@Html.LabelFor(x => x.Email, "Почта:") <span>&nbsp;</span>
+@Html.DisplayFor(x => x.Email)
+
+<br />
+@Html.LabelFor(x => x.Telephone, "Телефон") <span>&nbsp;</span>
+@Html.DisplayFor(x => x.Telephone)
 

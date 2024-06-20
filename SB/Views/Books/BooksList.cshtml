@@ -1,47 +1,114 @@
-﻿@using SB.ViewModels
+﻿<style>
+    .responsive-image {
+        width: 33%;
+        min-height: 80px;
+        max-height: 90px;
+        height: auto;
+        max-width: 600px;
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+<style>
+    .new-section {
+        border-radius: 10px;
+        height: 100%;
+        width: 250px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-block:10px;
+        padding: 30px;
+        block-size:max-content;
+        display:block;
+        text-align: center;
+        background-color: whitesmoke;
+       
+        background-blend-mode: soft-light;
+        display: inline-grid;
+        box-shadow: 2px 1px 1px gray;
+    }
+</style>
+<style>
+    .inline-links {
+        display: flex;
+        gap: 10mpx;
+    }
+</style>
+<style>
+    .backgrount-image-bl {
+        background-size: cover;
+        background-image: url("./images/background.jpg");
+        background:inherit;
+    }
+</style>
+
+
+@using SB.ViewModels
 
 @model IEnumerable<BookVM>  
-
-<h4>BOOKS LIST</h4>
-<br />
-
-@if (Model.Count()== 0)
-{
-    <h3>Nothing found</h3>
-}
-
-@foreach (var b in Model)
-{
-    <tr>
-
-        @foreach (var i in b.Src)
-        {
-            <img src="@i" alt="Photo" width="70" height="100" />            
-        }
-
-        <b>@Html.LabelFor(x => b.Title)</b>
-        @Html.DisplayFor(x => b.Title)
-       
-        <br />
-
-        <b>@Html.LabelFor(x => b.Author)</b>
-        @Html.DisplayFor(x => b.Author)
-
-        <br />
-
-        <b>Swap</b>
-      
-       @Html.DisplayFor(x => b.Swap)
-        
-        <b>Price: </b>
-        <td>@b.Price</td> 
-        @Html.Display("Info")
-     
-    </tr>
+<tbody class="backgrount-image-bl">
+    <h4>Список книг</h4>
     <br />
-    @Html.ActionLink("more", "Details", "Books", new { idBook = b.Id }) <span>&nbsp;</span>
-    @Html.ActionLink("change", "Edit", "Books", new { idBook = b.Id } ,FormMethod.Get)    
-    @Html.ActionLink("Delete" , "Delete" , "Books" , new {idBook = b.Id})
-    <br />
-}
+
+
+    @if (Model.Count() == 0)
+    {
+        <h3>Ничего не найденно, нам жаль.</h3>
+    }
+
+
+    @foreach (var b in Model)
+    {
+        <div class="new-section">
+
+            @if (b.Src.Length != 0)
+            {
+                <img src="@b.Src.First()" alt="Photo" width="70" height="100" class="responsive-image" />
+            }
+            else
+            {
+
+                <img src="~/images/emptyList.jpg" alt="Photo" width="70" height="100" class="responsive-image" />
+            }
+
+            <b>@Html.LabelFor(x => b.Title, "Название:")</b>
+            @Html.DisplayFor(x => b.Title)
+
+            <br />
+
+            <b>@Html.LabelFor(x => b.Author, "Автор:")</b>
+            @Html.DisplayFor(x => b.Author)
+
+            <br />
+
+            <b>Обмен:</b>
+
+            @Html.DisplayFor(x => b.Swap)
+
+            <b>Цена: </b>
+            <td>@b.Price</td>
+            <b>@Html.LabelFor(w => b.Info, "Информация:")</b>
+            @Html.DisplayFor(m => b.Info)
+
+            @*
+              @Html.ActionLink("Изменить", "Edit", "Books", new { idBook = b.Id }, FormMethod.Get)
+           <span>&nbsp;</span>
+           @Html.ActionLink("Удалить", "Delete", "Books", new { idBook = b.Id })
+
+            *@
+
+            <br />
+            <span>&nbsp;</span>
+
+            @Html.ActionLink("Подробнее", "Details", "Books", new { idBook = b.Id },new {@class="text-dark"}) 
+
+
+        </div>
+    }
+
+</tbody>
+
+
+
+
 

@@ -33,8 +33,15 @@ namespace SB.Controllers
         {
             using (var dbContext = new SwapBookDbContext())
             {
-                var e = dbContext.Books.Include(e => e.Galaries).Include("IdCatalogNavigation").FirstOrDefault(b => b.Id == idBook);
-                var book = new GetBookModel().GetBookVM(e); 
+                var e = dbContext.Books.Include(e => e.Galaries).Include("IdCatalogNavigation").Include("IdUserNavigation").FirstOrDefault(b => b.Id == idBook);
+
+                var book = new GetBookModel().GetBookVM(e);
+                //
+
+                book.Email = e.IdUserNavigation.Email;
+
+                book.Telephone =e.IdUserNavigation.Phone;
+               
 
                 // добавляем изображения
                 //book.Src = 
